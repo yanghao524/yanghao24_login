@@ -1,0 +1,41 @@
+{
+  "name": "yanghao24_login",
+  "version": "1.0.0",
+  "description": "一个基于Node.js和SQLite的用户登录系统，提供完整的用户注册、登录、密码找回和昵称修改功能",
+  "main": "server/server.js",
+  "scripts": {
+    "start": "node server/server.js",
+    "dev": "nodemon server/server.js",
+    "test": "jest tests/api",
+    "test:e2e": "jest tests/e2e"
+  },
+  "keywords": [
+    "nodejs",
+    "express",
+    "sqlite",
+    "login-system",
+    "user-authentication",
+    "password-reset",
+    "nickname-management"
+  ],
+  "author": "yanghao24",
+  "license": "ISC",
+  "devDependencies": {
+    "@playwright/test": "^1.56.1",
+    "jest": "^30.2.0",
+    "nodemon": "^3.1.11",
+    "supertest": "^7.1.4"
+  },
+  "dependencies": {
+    "bcrypt": "^6.0.0",
+    "cors": "^2.8.5",
+    "dotenv": "^17.2.3",
+    "express": "^5.1.0",
+    "express-validator": "^7.3.1",
+    "helmet": "^8.1.0",
+    "playwright": "^1.56.1",
+    "playwright-core": "^1.56.1",
+    "sqlite3": "^5.1.7",
+    "xlsx": "^0.18.5"
+  }
+}

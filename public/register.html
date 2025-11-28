@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>用户注册</title>
+    <link rel="stylesheet" href="style.css">
+
+</head>
+<body>
+    <div class="register-page-container">
+        <div class="login-box">
+            <h2>用户注册</h2>
+            <form id="register-form">
+                <!-- 用户名输入框 -->
+                <div class="input-group">
+                    <label for="username">用户名<span class="required">*</span></label>
+                    <input type="text" id="username" name="username" placeholder="请输入用户名" required>
+                    <div class="error-message" id="usernameError"></div>
+                </div>
+                
+                <!-- 昵称输入框 -->
+                <div class="input-group">
+                    <label for="nickname">昵称<span class="required">*</span></label>
+                    <div class="input-with-validation">
+                        <input type="text" id="nickname" name="nickname" placeholder="请输入昵称" required maxlength="20">
+                        <div class="validation-icon" id="nicknameValidationIcon"></div>
+                    </div>
+                    <div class="error-message" id="nicknameError"></div>
+                </div>
+                
+                <!-- 密码输入框 -->
+                <div class="input-group">
+                    <label for="password">密码<span class="required">*</span></label>
+                    <input type="password" id="password" name="password" placeholder="请输入密码" required>
+                    <div class="password-strength" id="passwordStrength"></div>
+                    <div class="error-message" id="passwordError"></div>
+                </div>
+
+                <!-- 确认密码输入框 -->
+                <div class="input-group">
+                    <label for="confirmPassword">确认密码<span class="required">*</span></label>
+                    <input type="password" id="confirmPassword" name="confirmPassword" placeholder="请再次输入密码" required>
+                    <div class="error-message" id="confirmPasswordError"></div>
+                </div>
+                
+                <!-- 邮箱输入框 -->
+                <div class="input-group">
+                    <label for="email">电子邮箱<span class="required">*</span></label>
+                    <input type="email" id="email" name="email" placeholder="请输入电子邮箱" required>
+                    <div class="error-message" id="emailError"></div>
+                </div>
+
+                <!-- 手机号码输入框 -->
+                <div class="input-group">
+                    <label for="phone">手机号码</label>
+                    <input type="tel" id="phone" name="phone" placeholder="请输入手机号码（选填）">
+                    <div class="error-message" id="phoneError"></div>
+                </div>
+                
+                <!-- 验证问题输入区域 -->
+                <div class="input-group">
+                    <label for="securityQuestion">验证问题<span class="required">*</span></label>
+                    <select id="securityQuestion" name="securityQuestion" required>
+                        <option value="">请选择验证问题</option>
+                        <option value="您母亲的姓名是？">您母亲的姓名是？</option>
+                        <option value="您的出生地是？">您的出生地是？</option>
+                        <option value="您的小学名称是？">您的小学名称是？</option>
+                        <option value="您的第一个宠物名字是？">您的第一个宠物名字是？</option>
+                        <option value="您的理想职业是？">您的理想职业是？</option>
+                    </select>
+                    <div class="error-message" id="securityQuestionError"></div>
+                </div>
+                
+                <!-- 验证答案输入区域 -->
+                <div class="input-group">
+                    <label for="securityAnswer">问题答案<span class="required">*</span></label>
+                    <input type="text" id="securityAnswer" name="securityAnswer" placeholder="请输入答案" required minlength="4" maxlength="20">
+                    <div class="error-message" id="securityAnswerError"></div>
+                </div>
+                
+                <!-- 验证码输入区域 -->
+                <div class="input-group">
+                    <label for="captcha">验证码<span class="required">*</span></label>
+                    <div class="captcha-container">
+                        <input type="text" id="captcha" name="captcha" placeholder="请输入验证码" required maxlength="4">
+                        <div class="captcha-image" id="captchaImage">
+                            <!-- 验证码图片将通过JavaScript生成 -->
+                        </div>
+                    </div>
+                    <div class="error-message" id="captchaError"></div>
+                </div>
+                
+                <!-- 注册按钮 -->
+                <button type="submit" class="login-button" id="registerButton">注册</button>
+                
+                <!-- 辅助链接区域 -->
+                <div class="links-container">
+                    <a href="login.html" class="login-link">已有账号？立即登录</a>
+                </div>
+            </form>
+        </div>
+    </div>
+    
+    <script src="register.js"></script>
+    <script src="script.js"></script>
+
+</body>
+</html>

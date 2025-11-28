@@ -1,0 +1,811 @@
+/* 全局样式重置 */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+        'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+        sans-serif;
+}
+
+body {
+    background-color: #ffffff;
+    display: flex;
+    justify-content: center;
+    align-items: center; /* 添加垂直居中对齐，将登录组件下移到页面中间 */
+    min-height: 100vh;
+    background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 50%, #e9ecef 100%);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    position: relative;
+    overflow-y: auto; /* 允许页面垂直滚动 */
+    padding: 20px 0; /* 增加上下内边距，避免内容贴边 */
+    scrollbar-width: none; /* 隐藏Firefox滚动条 */
+    -ms-overflow-style: none; /* 隐藏IE/Edge滚动条 */
+}
+
+/* 添加现代艺术感的背景图案 */
+body::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: 
+        radial-gradient(circle at 20% 30%, rgba(59, 130, 246, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 80% 70%, rgba(139, 92, 246, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 40% 80%, rgba(34, 197, 94, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 60% 20%, rgba(239, 68, 68, 0.1) 0%, transparent 50%);
+    background-size: 100% 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    z-index: 1;
+    pointer-events: none;
+}
+
+/* 添加微妙的网格纹理 */
+body::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: 
+        linear-gradient(rgba(0, 0, 0, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 0, 0, 0.03) 1px, transparent 1px);
+    background-size: 50px 50px;
+    z-index: 1;
+    pointer-events: none;
+}
+
+/* 登录页面容器样式 */
+.login-page-container {
+    position: relative;
+    z-index: 10;
+    width: 100%;
+    max-width: 400px; /* 登录页面宽度保持400px */
+    padding: 20px;
+    max-height: calc(100vh - 40px); /* 限制最大高度，减去body的上下内边距 */
+    overflow-y: auto; /* 允许容器内垂直滚动 */
+    scrollbar-width: none; /* 隐藏Firefox滚动条 */
+    -ms-overflow-style: none; /* 隐藏IE/Edge滚动条 */
+}
+
+/* 注册页面容器样式 */
+.register-page-container {
+    position: relative;
+    z-index: 10;
+    width: 100%;
+    max-width: 1000px; /* 注册页面宽度恢复到1000px */
+    padding: 20px;
+    max-height: calc(100vh - 40px); /* 限制最大高度，减去body的上下内边距 */
+    overflow-y: auto; /* 允许容器内垂直滚动 */
+    scrollbar-width: none; /* 隐藏Firefox滚动条 */
+    -ms-overflow-style: none; /* 隐藏IE/Edge滚动条 */
+}
+
+/* 隐藏WebKit浏览器（Chrome、Safari等）的滚动条 */
+.login-page-container::-webkit-scrollbar,
+.register-page-container::-webkit-scrollbar {
+    width: 0; /* 滚动条宽度设置为0 */
+    height: 0; /* 滚动条高度设置为0 */
+}
+
+/* 隐藏body的WebKit滚动条 */
+body::-webkit-scrollbar {
+    width: 0; /* 滚动条宽度设置为0 */
+    height: 0; /* 滚动条高度设置为0 */
+}
+
+.login-box {
+    background-color: rgba(255, 255, 255, 0.95);
+    border-radius: 16px; /* 保持圆角，提升现代感 */
+    padding: 25px 40px; /* 减小垂直内边距，缩小高度 */
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15); /* 保持阴影效果 */
+    backdrop-filter: blur(10px); /* 保持模糊效果 */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    min-height: auto; /* 自动高度，适应内容 */
+    display: flex;
+    flex-direction: column;
+}
+
+/* 增加表单容器，优化内部布局 */
+#login-form, #register-form {
+    display: flex;
+    flex-direction: column;
+    gap: 0px; /* 进一步减小表单元素间距，使表单项更紧凑 */
+}
+
+/* 优化输入组样式，确保密码提示不会遮挡下方内容 */
+.input-group {
+    margin-bottom: 5px; /* 减小表单项之间的间距，使表单项更紧凑 */
+    display: flex;
+    flex-direction: column;
+    gap: 6px; /* 减小标签与输入框间距 */
+    position: relative;
+}
+
+/* 优化密码强度提示样式 */
+.password-strength {
+    margin-top: 2px;
+    margin-bottom: 2px;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    font-size: 13px; /* 减小字体大小，节省空间 */
+}
+
+/* 优化密码强度提示中的文本和进度条 */
+.password-strength > div {
+    margin: 0;
+    padding: 0;
+}
+
+/* 优化密码强度条高度 */
+.strength-bar-fill {
+    height: 3px; /* 减小进度条高度 */
+}
+
+/* 确保错误信息有足够空间显示 */
+.error-message {
+    margin-top: 8px;
+    color: #ff4d4f;
+    font-size: 12px;
+    line-height: 1.4;
+    display: none;
+}
+
+/* 错误字段样式 */
+.input-group input.error,
+.input-group select.error {
+    border: 2px solid #ff4d4f;
+    border-style: solid;
+}
+
+/* 错误字段焦点样式 */
+.input-group input.error:focus,
+.input-group select.error:focus {
+    border-color: #ff4d4f;
+    box-shadow: 0 0 0 3px rgba(255, 77, 79, 0.2);
+}
+
+/* 优化验证码容器布局 */
+.captcha-container {
+    display: flex;
+    gap: 12px;
+    align-items: stretch; /* 确保元素高度一致 */
+}
+
+/* 优化登录按钮样式 */
+.login-button {
+    margin-top: 8px; /* 减小按钮与表单的间距 */
+    padding: 12px 20px; /* 减小按钮内边距 */
+    font-size: 15px; /* 减小按钮字体大小 */
+    font-weight: 600;
+}
+
+/* 优化辅助链接区域 */
+.links-container {
+    margin-top: 12px; /* 减小链接区域与按钮的间距 */
+    display: flex;
+    justify-content: center; /* 居中显示链接 */
+    gap: 15px; /* 减小链接间距 */
+    flex-wrap: wrap;
+}
+
+/* 优化链接样式 */
+.forgot-password, .register, .login-link {
+    font-size: 14px;
+    color: #4a6cf7;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.forgot-password:hover, .register:hover, .login-link:hover {
+    color: #3a5ceb;
+    text-decoration: underline;
+}
+
+.login-box:hover {
+    transform: translateY(-5px);
+}
+
+/* 标题样式 */
+h2 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 20px; /* 减小标题下方间距 */
+    font-weight: 600;
+    font-size: 22px; /* 减小标题字体大小 */
+}
+
+/* 输入组样式 */
+.input-group {
+    margin-bottom: 5px; /* 减小表单项之间的间距，使表单项更紧凑 */
+}
+
+.input-group label {
+    display: block;
+    margin-bottom: 5px; /* 减小标签下方间距 */
+    color: #555;
+    font-weight: 500;
+    font-size: 14px;
+}
+
+/* 必填字段红色星号样式 */
+.required {
+    color: #e74c3c;
+    margin-left: 2px;
+}
+
+/* 密码找回页面样式 */
+.forgot-password-container {
+    position: relative;
+    z-index: 10;
+    width: 100%;
+    max-width: 400px;
+    padding: 20px;
+    max-height: calc(100vh - 40px);
+    overflow-y: auto;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
+.forgot-password-container::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+}
+
+.forgot-password-box {
+    background-color: rgba(255, 255, 255, 0.95);
+    border-radius: 16px;
+    padding: 25px 40px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+    backdrop-filter: blur(10px);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    min-height: auto;
+    display: flex;
+    flex-direction: column;
+}
+
+/* 进度指示器样式 */
+.progress-indicator {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 25px;
+    font-size: 14px;
+    color: #666;
+}
+
+.progress-step {
+    flex: 1;
+    text-align: center;
+    padding: 8px 0;
+    border-bottom: 2px solid #e0e0e0;
+    transition: all 0.3s ease;
+}
+
+.progress-step.active {
+    color: #3b82f6;
+    border-bottom-color: #3b82f6;
+    font-weight: 600;
+}
+
+/* 阶段样式 */
+.step {
+    display: none;
+}
+
+.step.active {
+    display: block;
+    animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* 安全问题样式 */
+.security-question {
+    padding: 12px 15px;
+    border: 1px solid rgba(200, 200, 200, 0.8);
+    border-radius: 8px;
+    background-color: #f8f9fa;
+    font-size: 16px;
+    margin-bottom: 8px;
+    color: #333;
+}
+
+/* 按钮组样式 */
+.button-group {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+    gap: 10px;
+}
+
+.button-group button {
+    flex: 1;
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+/* 按钮样式 */
+.next-button,
+.reset-button {
+    background-color: #3b82f6;
+    color: white;
+    box-shadow: 0 4px 6px rgba(59, 130, 246, 0.3);
+}
+
+.next-button:hover,
+.reset-button:hover {
+    background-color: #2563eb;
+    box-shadow: 0 6px 8px rgba(59, 130, 246, 0.4);
+}
+
+.back-button {
+    background-color: #6c757d;
+    color: white;
+}
+
+.back-button:hover {
+    background-color: #5a6268;
+}
+
+.cancel-button {
+    background-color: #e9ecef;
+    color: #495057;
+}
+
+.cancel-button:hover {
+    background-color: #dee2e6;
+}
+
+/* 成功消息样式 */
+.success-message {
+    display: none;
+    text-align: center;
+    padding: 20px 0;
+    animation: fadeIn 0.3s ease;
+}
+
+.success-message h3 {
+    color: #22c55e;
+    margin-bottom: 10px;
+    font-size: 20px;
+}
+
+.success-message p {
+    color: #666;
+    margin-bottom: 20px;
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+    .forgot-password-container {
+        max-width: 100%;
+        padding: 15px;
+    }
+    
+    .forgot-password-box {
+        padding: 20px;
+    }
+    
+    .progress-indicator {
+        font-size: 12px;
+    }
+    
+    .button-group {
+        flex-direction: column;
+    }
+    
+    .button-group button {
+        width: 100%;
+    }
+}
+
+@media (max-width: 480px) {
+    .forgot-password-box {
+        padding: 15px;
+        border-radius: 12px;
+    }
+    
+    .progress-indicator {
+        flex-direction: column;
+        gap: 5px;
+    }
+    
+    .progress-step {
+        text-align: left;
+        border-bottom: none;
+        border-left: 2px solid #e0e0e0;
+        padding-left: 10px;
+    }
+    
+    .progress-step.active {
+        border-left-color: #3b82f6;
+    }
+}
+
+.input-group input,
+.input-group select {
+    width: 100%;
+    padding: 12px 15px;
+    border: 1px solid rgba(200, 200, 200, 0.8);
+    border-radius: 8px;
+    font-size: 16px;
+    background-color: rgba(255, 255, 255, 0.9);
+    transition: border-color 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+}
+
+/* 输入框与验证图标的容器样式 */
+.input-with-validation {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+/* 带验证图标的输入框样式 */
+.input-with-validation input {
+    padding-right: 40px; /* 为验证图标预留空间 */
+}
+
+/* 验证图标样式 */
+.validation-icon {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 18px;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+/* 验证通过的图标样式 */
+.validation-icon.valid {
+    color: #22c55e;
+    opacity: 1;
+}
+
+/* 验证失败的图标样式 */
+.validation-icon.invalid {
+    color: #ff4d4f;
+    opacity: 1;
+}
+
+.input-group input:focus,
+.input-group select:focus {
+    outline: none;
+    border-color: #3b82f6;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
+    background-color: white;
+}
+
+/* 验证码容器样式 */
+.captcha-container {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.captcha-image {
+    width: 120px;
+    height: 44px;
+    background-color: #f0f0f0;
+    border-radius: 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 24px;
+    font-weight: bold;
+    letter-spacing: 4px;
+    cursor: pointer;
+    user-select: none;
+    transition: background-color 0.3s ease;
+    padding: 5px;
+}
+
+.captcha-image:hover {
+    background-color: #e0e0e0;
+}
+
+/* 登录按钮样式 */
+.login-button {
+    width: 100%;
+    padding: 14px;
+    background-color: #3b82f6;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.1s ease, box-shadow 0.3s ease;
+    margin-top: 10px;
+    box-shadow: 0 4px 6px rgba(59, 130, 246, 0.3);
+}
+
+.login-button:hover {
+    background-color: #2563eb;
+    box-shadow: 0 6px 8px rgba(59, 130, 246, 0.4);
+}
+
+.login-button:active {
+    transform: scale(0.98);
+}
+
+/* 辅助链接样式 */
+.links-container {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+/* 辅助链接样式 */
+.forgot-password, .register {
+    color: #4a6cf7;
+    text-decoration: none;
+    font-size: 14px;
+    transition: color 0.3s ease;
+}
+
+.forgot-password:hover, .register:hover {
+    color: #3a5ceb;
+    text-decoration: underline;
+}
+
+/* 登录后过渡页面样式 */
+.dashboard-body {
+    background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 50%, #e9ecef 100%);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    position: relative;
+    overflow: hidden;
+}
+
+/* 半透明遮罩层，增强文字可读性 */
+.dashboard-body::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(255, 255, 255, 0.3);
+    z-index: 1;
+}
+
+/* 用户信息区域样式 */
+.user-info-container {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    z-index: 100;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+.user-name {
+    padding: 10px 15px;
+    background-color: rgba(255, 255, 255, 0.9);
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 600;
+    color: #333;
+    cursor: pointer;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    position: relative;
+    z-index: 101;
+}
+
+.user-name:hover {
+    background-color: white;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+    transform: translateY(-2px);
+}
+
+/* 下拉菜单样式 */
+.dropdown-menu {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    margin-top: 5px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+    min-width: 120px;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: all 0.3s ease;
+    z-index: 100;
+}
+
+.user-info-container:hover .dropdown-menu {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.dropdown-item {
+    padding: 10px 15px;
+    font-size: 14px;
+    color: #333;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    border-radius: 8px;
+    margin: 2px;
+}
+
+.dropdown-item:hover {
+    background-color: #f8f9fa;
+    color: #3b82f6;
+}
+
+/* 中央提示区域样式 */
+.dashboard-content {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    background-color: rgba(255, 255, 255, 0.95);
+    padding: 40px 60px;
+    border-radius: 16px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+    backdrop-filter: blur(10px);
+    max-width: 500px;
+    animation: fadeIn 0.5s ease;
+}
+
+.dashboard-title {
+    font-size: 32px;
+    font-weight: 700;
+    color: #333;
+    margin-bottom: 20px;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.dashboard-nickname {
+    font-size: 24px;
+    font-weight: 600;
+    color: #3b82f6;
+    margin-bottom: 15px;
+    line-height: 1.4;
+}
+
+.dashboard-message {
+    font-size: 18px;
+    color: #666;
+    line-height: 1.6;
+    margin: 0;
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+    .user-info-container {
+        top: 15px;
+        right: 15px;
+    }
+    
+    .user-name {
+        font-size: 14px;
+        padding: 8px 12px;
+    }
+    
+    .dashboard-content {
+        padding: 30px 40px;
+        margin: 0 20px;
+    }
+    
+    .dashboard-title {
+        font-size: 28px;
+    }
+    
+    .dashboard-message {
+        font-size: 16px;
+    }
+}
+
+@media (max-width: 480px) {
+    .dashboard-content {
+        padding: 25px 30px;
+        margin: 0 15px;
+        border-radius: 12px;
+    }
+    
+    .dashboard-title {
+        font-size: 24px;
+    }
+    
+    .dashboard-message {
+        font-size: 15px;
+    }
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+    .login-page-container,
+    .register-page-container {
+        max-width: 100%; /* 在平板设备上使用全屏宽度 */
+        padding: 15px;
+    }
+    
+    .login-box {
+        padding: 30px 25px;
+    }
+    
+    /* 调整表单间距，适应较小屏幕 */
+    #login-form, #register-form {
+        gap: 10px; /* 进一步减小表单间距，适应较小屏幕 */
+    }
+    
+    /* 调整输入组最小高度，适应较小屏幕 */
+    .input-group {
+        min-height: 65px; /* 进一步减小最小高度 */
+    }
+    
+    /* 调整密码强度提示高度 */
+    .password-strength {
+        /* 移除固定高度，让内容自适应 */
+    }
+}
+
+@media (max-width: 480px) {
+    .login-box {
+        padding: 25px 20px;
+        border-radius: 12px; /* 减小圆角，适应小屏幕 */
+    }
+    
+    /* 验证码容器垂直排列 */
+    .captcha-container {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 8px; /* 减小验证码容器内间距 */
+    }
+    
+    /* 验证码图片全屏宽度 */
+    .captcha-image {
+        width: 100%;
+        height: 44px; /* 调整高度，适应小屏幕 */
+    }
+    
+    /* 调整表单间距，适应手机屏幕 */
+    #login-form, #register-form {
+        gap: 8px; /* 进一步减小表单间距，适应手机屏幕 */
+    }
+    
+    /* 调整输入组最小高度，适应手机屏幕 */
+    .input-group {
+        min-height: 60px; /* 进一步减小最小高度 */
+    }
+    
+    /* 调整密码强度提示高度 */
+    .password-strength {
+        /* 移除固定高度，让内容自适应 */
+    }
+    
+    /* 调整链接容器布局 */
+    .links-container {
+        flex-direction: column;
+        align-items: center;
+        gap: 10px; /* 减小链接间距 */
+    }
+}
+

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>修改昵称</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="dashboard-body">
+    <!-- 用户信息区域 -->
+    <div class="user-info-container">
+        <div class="user-name" id="userName">用户</div>
+        <div class="dropdown-menu" id="dropdownMenu">
+            <div class="dropdown-item" id="changeNicknameBtn">修改昵称</div>
+            <div class="dropdown-item" id="logoutBtn">退出登录</div>
+        </div>
+    </div>
+    
+    <!-- 中央修改昵称区域 -->
+    <div class="dashboard-content">
+        <h1 class="dashboard-title">修改昵称</h1>
+        <form id="nickname-form">
+            <div class="input-group">
+                <label for="newNickname">新昵称<span class="required">*</span></label>
+                <div class="input-with-validation">
+                    <input type="text" id="newNickname" name="newNickname" placeholder="请输入新昵称" required maxlength="20">
+                    <div class="validation-icon" id="nicknameValidationIcon"></div>
+                </div>
+                <div class="error-message" id="nicknameError"></div>
+            </div>
+            
+            <div class="button-group">
+                <button type="button" class="cancel-button" id="cancelBtn">取消</button>
+                <button type="submit" class="confirm-button" id="confirmBtn">确定</button>
+            </div>
+        </form>
+    </div>
+    
+    <script src="nickname-edit.js"></script>
+    <script src="dashboard.js"></script>
+</body>
+</html>

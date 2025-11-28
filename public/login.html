@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>用户登录</title>
+    <link rel="stylesheet" href="style.css">
+
+</head>
+<body>
+    <div class="login-page-container">
+        <div class="login-box">
+            <h2>用户登录</h2>
+            <form id="login-form">
+                <!-- 表单提交事件将通过JavaScript动态绑定 -->
+                <!-- 用户名输入框 -->
+                <div class="input-group">
+                    <label for="username">用户名</label>
+                    <input type="text" id="username" name="username" placeholder="请输入用户名" required>
+                    <div class="error-message" id="usernameError"></div>
+                </div>
+                
+                <!-- 密码输入框 -->
+                <div class="input-group">
+                    <label for="password">密码</label>
+                    <input type="password" id="password" name="password" placeholder="请输入密码" required>
+                    <div class="error-message" id="passwordError"></div>
+                </div>
+                
+                <!-- 验证码输入区域 -->
+                <div class="input-group">
+                    <label for="captcha">验证码</label>
+                    <div class="captcha-container">
+                        <input type="text" id="captcha" name="captcha" placeholder="请输入验证码" required maxlength="4">
+                        <div class="captcha-image" id="captchaImage">
+                            <!-- 验证码图片将通过JavaScript生成 -->
+                        </div>
+                    </div>
+                    <div class="error-message" id="captchaError"></div>
+                </div>
+                
+                <!-- 登录按钮 -->
+                <button type="submit" class="login-button">登录</button>
+                
+                <!-- 辅助链接区域 -->
+                <div class="links-container">
+                    <a href="forgot-password.html" class="forgot-password">忘记密码?</a>
+                    <a href="register.html" class="register">立即注册</a>
+                </div>
+            </form>
+        </div>
+    </div>
+    
+    <script src="script.js"></script>
+    
+
+</body>
+</html>
