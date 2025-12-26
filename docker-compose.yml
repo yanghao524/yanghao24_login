@@ -1,0 +1,33 @@
+version: '3.8'
+
+services:
+  app:
+    # 使用当前目录的Dockerfile构建镜像
+    build: .
+    
+    # 容器名称
+    container_name: yanghao24_login_app
+    
+    # 端口映射：主机端口:容器端口
+    ports:
+      - "3000:3000"
+    
+    # 环境变量配置
+    environment:
+      - NODE_ENV=production
+      - DB_PATH=users.db
+    
+    # 卷配置：持久化数据库文件
+    volumes:
+      - ./users.db:/app/users.db
+    
+    # 重启策略：容器退出时自动重启，除非手动停止
+    restart: unless-stopped
+    
+    # 健康检查：定期检查应用是否正常运行
+    healthcheck:
+      test: ["CMD", "node", "-e", "require('http').get('http://localhost:3000', (res) => { process.exit(res.statusCode === 200 ? 0 : 1) }).on('error', () => { process.exit(1) })"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 30s
